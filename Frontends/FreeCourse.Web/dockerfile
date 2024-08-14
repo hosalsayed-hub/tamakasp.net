@@ -1,7 +1,7 @@
 FROM mcr.microsoft.com/dotnet/sdk:5.0-buster-slim as build
 WORKDIR /app
 EXPOSE 80
-COPY Shared/FreeCourse.Shared/*.csproj Shared/FreeCourse.Shared/
+COPY ./Shared/FreeCourse.Shared/*.csproj Shared/FreeCourse.Shared/
 COPY Frontends/FreeCourse.Web/*.csproj Frontends/FreeCourse.Web/
 RUN dotnet restore Frontends/FreeCourse.Web/*.csproj
 COPY . .
