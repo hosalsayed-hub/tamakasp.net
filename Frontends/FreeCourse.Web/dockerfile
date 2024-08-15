@@ -1,4 +1,4 @@
-FROM mcr.microsoft.com/dotnet/sdk:5.0-buster-slim as base
+FROM mcr.microsoft.com/dotnet/sdk:5.0-buster-slim as baseins
 WORKDIR /app
 EXPOSE 80
 FROM mcr.microsoft.com/dotnet/sdk:5.0-buster-slim as build
