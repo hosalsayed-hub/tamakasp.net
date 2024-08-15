@@ -1,24 +1,11 @@
-FROM mcr.microsoft.com/dotnet/sdk:5.0-buster-slim as base
-WORKDIR /Frontends/FreeCourse.Web/
-EXPOSE 80
-#copy /app /app
+FROM mcr.microsoft.com/dotnet/aspnet:5.0
 
-FROM mcr.microsoft.com/dotnet/sdk:5.0-buster-slim as build
+ARG WEBAPP_VERSION=0.0.1
+LABEL maintainer=anymail@email_server.com \
+    Name=webapp \
+    Version=${WEBAPP_VERSION}
+ARG URL_PORT
 WORKDIR /app
-COPY ["/Frontends/FreeCourse.Web/*.csproj","FreeCourse.Web/"]
-COPY . .
-#COPY ["/Frontends/FreeCourse.Web/*.csproj","Frontends/FreeCourse.Web/"]
-RUN dotnet restore "/Frontends/FreeCourse.Web/FreeCourse.Web.csproj"
-WORKDIR "/app/FreeCourse.Web/"
-RUN dotnet build "Frontends/FreeCourse.Web/*FreeCourse.Web.csproj" -c Release -o /app/build
-
-FROM build as publish
-RUN dotnet publish "Frontends/FreeCourse.Web/FreeCourse.Web.csproj" -c Release -o /app/publish
-#FROM mcr.microsoft.com/dotnet/aspnet:5.0-buster-slim as runtime
-#WORKDIR /app
-#COPY --from=build /app/out 
-
-FROM base as final
-WORKDIR /app
-COPY --from=publish /app/out .
-ENTRYPOINT [ "dotnet","FreeCourse.Web.dll" ]
+ENV NUGET_XMLDOC_MODE skip
+ENV ASPNETCORE_URLS http://*:${URL_PORT}
+ENTRYPOINT [ "dotnet", "FreeCourse.dll" ]
