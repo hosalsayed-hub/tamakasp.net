@@ -1,5 +1,5 @@
 FROM mcr.microsoft.com/dotnet/sdk:5.0-buster-slim as base
-WORKDIR /app
+WORKDIR /Frontends/FreeCourse.Web/app
 EXPOSE 80
 #copy /app /app
 
