@@ -8,7 +8,7 @@ WORKDIR /app
 COPY ["Frontends/FreeCourse.Web/*.csproj","FreeCourse.Web/"]
 COPY . .
 #COPY ["/Frontends/FreeCourse.Web/*.csproj","Frontends/FreeCourse.Web/"]
-RUN dotnet restore "Frontends/FreeCourse.Web/FreeCourse.Web.csproj"
+RUN dotnet restore "FreeCourse.Web.csproj"
 WORKDIR "/app/FreeCourse.Web/"
 RUN dotnet build "Frontends/FreeCourse.Web/*FreeCourse.Web.csproj" -c Release -o /app/build
 
